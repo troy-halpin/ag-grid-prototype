@@ -1,18 +1,49 @@
 import * as React from 'react'
+import { Font, Button } from '@procore/core-react'
 import { AgGridReact } from '@ag-grid-community/react'
-import { AllModules, GridReadyEvent } from '@ag-grid-enterprise/all-modules'
+import { AllModules, GridReadyEvent, ColSpanParams } from '@ag-grid-enterprise/all-modules'
+
+const FontCellRenderer = (props: any) => {
+  return (
+    <Button>{props.value}</Button>
+  )
+}
 
 const COLUMN_DEFINITIONS = [
   {
     headerName: 'Foo', 
     field: 'foo',
-    rowGroup: true
+    rowGroup: true,
+    hide: true,
+    cellRenderer: 'fontCellRenderer',
+    colSpan: function(params: ColSpanParams) {
+      // console.log(params.colDef.rowGroup)
+      if (params.node.group) {
+        return 10;
+      }
+      return 1 
+    }
   },
   {
     headerName: 'Bar', 
     field: 'bar',
-    rowGroup: true
-  }
+    // rowGroup: true
+  },
+  {
+    headerName: 'Baz', 
+    field: 'baz',
+    // rowGroup: true
+  },
+  {
+    headerName: 'Qux', 
+    field: 'qux',
+    // rowGroup: true
+  },
+  {
+    headerName: 'Quxx', 
+    field: 'quxx',
+    // rowGroup: true
+  },
 ]
 
 const ROW_DATA = [
@@ -33,6 +64,10 @@ export default function AgGrid(props: any) {
     >
       <AgGridReact
         // properties
+        groupMultiAutoColumn={true}
+        frameworkComponents={{
+          fontCellRenderer: FontCellRenderer,
+        }}
         columnDefs={COLUMN_DEFINITIONS}
         rowData={ROW_DATA}
         modules={AllModules}
