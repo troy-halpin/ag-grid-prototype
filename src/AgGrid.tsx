@@ -2,6 +2,24 @@ import * as React from 'react'
 import { AgGridReact } from '@ag-grid-community/react'
 import { AllModules, GridReadyEvent } from '@ag-grid-enterprise/all-modules'
 
+const COLUMN_DEFINITIONS = [
+  {
+    headerName: 'Foo', 
+    field: 'foo',
+    rowGroup: true
+  },
+  {
+    headerName: 'Bar', 
+    field: 'bar',
+    rowGroup: true
+  }
+]
+
+const ROW_DATA = [
+  { foo: 'hi', bar: 'bye'},
+  { foo: 'hola', bar: 'adiós'},
+];
+
 export default function AgGrid(props: any) {
   const onGridReady = (params: GridReadyEvent) => {
     params.api.sizeColumnsToFit()
@@ -15,8 +33,8 @@ export default function AgGrid(props: any) {
     >
       <AgGridReact
         // properties
-        columnDefs={columnDefs}
-        rowData={rowData}
+        columnDefs={COLUMN_DEFINITIONS}
+        rowData={ROW_DATA}
         modules={AllModules}
         defaultColDef={{ filter: true }}
         // events
