@@ -10,6 +10,8 @@ import {
   ValueFormatterParams,
 } from '@ag-grid-enterprise/all-modules'
 
+const KEY_ENTER = 13
+
 const FontCellRenderer = (props: any) => {
   return (
     <Font size="md" weight="bold" variant="primary">
@@ -66,6 +68,11 @@ const COLUMN_DEFINITIONS: ColDef[] = [
       options: selectItems,
     },
     field: 'select',
+    suppressKeyboardEvent: function (params) {
+      // return true (to suppress) if editing and user hit up/down keys
+      var keyCode = params.event.keyCode
+      return params.editing && keyCode === KEY_ENTER
+    },
     valueFormatter: function (params: ValueFormatterParams) {
       if (!params.data) return undefined
       if (params.colDef.field) {
