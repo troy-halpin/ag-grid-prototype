@@ -1,0 +1,35 @@
+@import '../node_modules/@ag-grid-community/core/dist/styles/ag-grid.scss';
+@import '../node_modules/@ag-grid-community/core/dist/styles/ag-theme-alpine/sass/ag-theme-alpine-mixin';
+
+.ag-theme-alpine {
+  @include ag-theme-alpine(
+    (
+           // use theme param
+      suppress-native-widget-styling: true,
+      row-hover-color: hsl(200, 8%, 96%)
+    )
+  );
+
+  input[type='text']:focus {
+    background-color: white;
+    border-color: hsl(218, 75%, 50%);
+    box-shadow: 0 0 0 2px hsl(218, 75%, 94%);
+    color: hsl(200, 8%, 15%);
+    outline: none;
+  }
+}
+
+.percent-cell {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+// .ag-row-hover {
+//   /* putting in !important so it overrides the theme's styling as it hovers the row also */
+//   background-color: #dfdfff !important;
+// }
+
+// .ag-column-hover {
+//   background-color: #dfffdf;
+// }
